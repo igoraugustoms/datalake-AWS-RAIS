@@ -1,2 +1,5 @@
 .idea/
 venv/
+variables.tf
+.terraform/
+.terraform.lock.hcl
