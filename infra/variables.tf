@@ -14,3 +14,15 @@ variable "nome_bucket" {
   default = "datalake-igor-rais"
 }
 
+variable "airflow_subnet_id" {
+  default = "subnet-02e950aee8e04bce4"
+}
+
+variable "vpc_id" {
+  default = "vpc-0cb0059b717effe95"
+}
+
+variable "key_pair_name" {
+  default = "igor"
+}
+
