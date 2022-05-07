@@ -3,3 +3,4 @@ venv/
 variables.tf
 .terraform/
 .terraform.lock.hcl
+*.7z
