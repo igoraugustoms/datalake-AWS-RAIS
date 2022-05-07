@@ -1,10 +1,10 @@
 resource "aws_glue_catalog_database" "db" {
-  name = "RAIS"
+  name = "rais"
 }
 
 resource "aws_glue_crawler" "RAIS" {
   database_name = aws_glue_catalog_database.db.name
-  name          = "s3_crawler_RAIS"
+  name          = "s3_crawler_rais"
   role          = aws_iam_role.glue_role.arn
 
   s3_target {
