@@ -1,3 +1,4 @@
+/*
 # Imagem Ubuntu
 data "aws_ami" "ubuntu" {
   most_recent = true
@@ -76,3 +77,4 @@ resource "aws_security_group" "airflow_sg" {
     MODULO   = "1"
   }
 }
+*/
