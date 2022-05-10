@@ -19,6 +19,7 @@ def upload_arquivo():
         s3_client.upload_file(k,
                               "datalake-igor-234428941834",
                               "raw-data/rais/" + v)
+        print("Finalizado: " + k)
     print("Sucesso")
 
 
