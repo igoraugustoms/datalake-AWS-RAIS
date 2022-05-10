@@ -34,7 +34,7 @@ def handler(event, context):
             'Ec2KeyName': 'igor',
             'KeepJobFlowAliveWhenNoSteps': True,
             'TerminationProtected': False,
-            'Ec2SubnetId': 'subnet-1df20360'
+            'Ec2SubnetId': 'subnet-02e950aee8e04bce4'
         },
 
         Applications=[
