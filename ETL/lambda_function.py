@@ -8,11 +8,11 @@ def handler(event, context):
     client = boto3.client('emr', region_name='us-east-2')
 
     cluster_id = client.run_job_flow(
-        Name='EMR-Ney-IGTI-delta',
+        Name='EMR-IGTI',
         ServiceRole='EMR_DefaultRole',
         JobFlowRole='EMR_EC2_DefaultRole',
         VisibleToAllUsers=True,
-        LogUri='s3://datalake-ney-igti-edc-tf/emr-logs',
+        LogUri='s3://datalake-igor-rais-234428941834/emr-logs',
         ReleaseLabel='emr-6.3.0',
         Instances={
             'InstanceGroups': [
@@ -31,7 +31,7 @@ def handler(event, context):
                     'InstanceCount': 1,
                 }
             ],
-            'Ec2KeyName': 'ney-igti-teste',
+            'Ec2KeyName': 'igor',
             'KeepJobFlowAliveWhenNoSteps': True,
             'TerminationProtected': False,
             'Ec2SubnetId': 'subnet-1df20360'
@@ -84,7 +84,7 @@ def handler(event, context):
         StepConcurrencyLevel=1,
 
         Steps=[{
-            'Name': 'Delta Insert do ENEM',
+            'Name': 'Tratamento',
             'ActionOnFailure': 'CONTINUE',
             'HadoopJarStep': {
                 'Jar': 'command-runner.jar',
@@ -94,26 +94,10 @@ def handler(event, context):
                          '--conf', 'spark.sql.catalog.spark_catalog=org.apache.spark.sql.delta.catalog.DeltaCatalog',
                          '--master', 'yarn',
                          '--deploy-mode', 'cluster',
-                         's3://datalake-ney-igti-edc-tf/emr-code/pyspark/01_delta_spark_insert.py'
+                         's3://datalake-igor-rais-234428941834/emr-code/pyspark/tratamento.py'
                          ]
             }
-        },
-            {
-                'Name': 'Simulacao e UPSERT do ENEM',
-                'ActionOnFailure': 'CONTINUE',
-                'HadoopJarStep': {
-                    'Jar': 'command-runner.jar',
-                    'Args': ['spark-submit',
-                             '--packages', 'io.delta:delta-core_2.12:1.0.0',
-                             '--conf', 'spark.sql.extensions=io.delta.sql.DeltaSparkSessionExtension',
-                             '--conf',
-                             'spark.sql.catalog.spark_catalog=org.apache.spark.sql.delta.catalog.DeltaCatalog',
-                             '--master', 'yarn',
-                             '--deploy-mode', 'cluster',
-                             's3://datalake-ney-igti-edc-tf/emr-code/pyspark/02_delta_spark_upsert.py'
-                             ]
-                }
-            }],
+        }],
     )
 
     return {
