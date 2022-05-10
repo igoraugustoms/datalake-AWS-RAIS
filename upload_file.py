@@ -17,7 +17,7 @@ def upload_arquivo():
     print("Fazendo upload...")
     for k, v in arquivos.items():
         s3_client.upload_file(k,
-                              "datalake-igor-234428941834",
+                              "datalake-igor-rais-234428941834",
                               "raw-data/rais/" + v)
         print("Finalizado: " + k)
     print("Sucesso")
