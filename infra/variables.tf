@@ -14,6 +14,11 @@ variable "nome_bucket" {
   default = "datalake-igor-rais"
 }
 
+
+variable "lambda_function_name" {
+  default = "executaEMR"
+}
+
 variable "airflow_subnet_id" {
   default = "subnet-02e950aee8e04bce4"
 }

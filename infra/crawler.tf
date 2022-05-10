@@ -8,7 +8,7 @@ resource "aws_glue_crawler" "RAIS" {
   role          = aws_iam_role.glue_role.arn
 
   s3_target {
-    path = "s3://${aws_s3_bucket.datalake.bucket}/staging/"
+    path = "s3://${aws_s3_bucket.datalake.bucket}-staging/rais/"
   }
 
   configuration = <<EOF
