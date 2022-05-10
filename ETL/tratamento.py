@@ -1,16 +1,14 @@
-from pyspark.sql import SparkSession
 from pyspark.sql import functions as f
+from pyspark.sql import SparkSession
 
 # Cria objeto da Spark Session
 spark = (SparkSession.builder.appName("desafio")
-    .config("spark.jars.packages", "io.delta:delta-core_2.12:1.0.0")
-    .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
-    .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
-    .getOrCreate()
-)
+         .getOrCreate()
+         )
 
 df = (
-    spark.read
+    spark
+    .read
     .csv("s3://datalake-igor-rais-234428941834/rais/", inferSchema=True, header=True, sep=';', encoding="latin1")
 )
 
@@ -78,7 +76,7 @@ df = (
     .withColumnRenamed('Ind Trab Parcial', 'ind_trab_parcial')
 )
 
-df = df.withColumn("uf", f.col("municipio").cast('string').substr(1,2).cast('int'))
+df = df.withColumn("uf", f.col("municipio").cast('string').substr(1, 2).cast('int'))
 
 df = (
     df
@@ -99,7 +97,6 @@ df = (
     .withColumn("vl_rem_outubro_sc", f.regexp_replace("vl_rem_outubro_sc", ',', '.').cast('double'))
     .withColumn("vl_rem_novembro_sc", f.regexp_replace("vl_rem_novembro_sc", ',', '.').cast('double'))
 )
-
 
 (
     df
