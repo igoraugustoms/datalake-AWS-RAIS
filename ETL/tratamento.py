@@ -9,7 +9,7 @@ spark = (SparkSession.builder.appName("desafio")
 df = (
     spark
     .read
-    .csv("s3://datalake-igor-rais-234428941834/rais/", inferSchema=True, header=True, sep=';', encoding="latin1")
+    .csv("s3://datalake-igor-rais-234428941834/raw-data/rais/", inferSchema=True, header=True, sep=';', encoding="latin1")
 )
 
 df = (
