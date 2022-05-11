@@ -5,3 +5,4 @@ variables.tf
 .terraform.lock.hcl
 *.7z
 data/
+*.zip
